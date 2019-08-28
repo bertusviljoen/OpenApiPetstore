@@ -1,0 +1,13 @@
+{
+    "packageAuthors": "PetStoreCompany",
+    "packageTitle": "Petstore",
+    "packageName": "Petsore.Server.Api",
+    "buildTarget": "program",
+    "operationIsAsync": "true",
+    "operationResultTask": "false",
+    "classModifier": "abstract",
+    "modelClassModifier": "partial",
+    "sourceFolder" : "src",
+    "compatibilityVersion" : "Version_2_2",
+    "aspnetCoreVersion" : "2.2"
+   }

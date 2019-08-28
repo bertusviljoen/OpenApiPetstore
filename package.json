@@ -1,0 +1,16 @@
+{
+  "name": "ServerStubs",
+  "version": "0.0.0",
+  "description": "ServerStubs",
+  "main": "",
+  "author": {
+    "name": ""
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "0.0.16-4.1.0"
+  },
+  "scripts": {
+    "gen-cli": "openapi-generator",
+    "genExample": "openapi-generator generate -i petstoredoc/petstore.yml -g aspnetcore -o petstorecodegen -c serverConfig.json"
+  }
+}

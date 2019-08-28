@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+   <TargetFramework>netstandard2.0</TargetFramework>
+ </PropertyGroup>
+ <!--Input files-->
+ <ItemGroup>
+   <CodeGenSourceFiles Include="*.yaml" />
+   <CodeGenSourceFiles Include="serverConfig.json" />
+ </ItemGroup>
+ <!--Output file
+ This needs to be done inside a target otherwise $(IntermediateOutputPath) is not populated
+ by the time below property is set. -->
+ <Target Name="DefineProperty" BeforeTargets="CodeGen">
+   <PropertyGroup>
+     <!-- File with mtime of last successful codegen -->
+     <CodeGenStampFile>$(IntermediateOutputPath)\.codegen-stamp</CodeGenStampFile>
+   </PropertyGroup>
+ </Target>
+ <!--Incremental codegen target for rebuild-->
+ <Target Name="CodeGen" BeforeTargets="PreBuildEvent" Inputs="@(CodeGenSourceFiles)" Outputs="$(CodeGenStampFile)">
+   <Exec Command="npm run genExample" />
+   <Touch Files="$(CodeGenStampFile)" AlwaysCreate="true" />
+ </Target>
+ <!--Incremental codegen for build-->
+ <ItemGroup>
+   <UpToDateCheckInput Include="@(CodeGenSourceFiles)" />
+   <UpToDateCheckOutput Include="$(CodeGenStampFile)" />
+ </ItemGroup>
+</Project>
