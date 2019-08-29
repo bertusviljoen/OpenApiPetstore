@@ -36,7 +36,21 @@ Move to Petsore.Server.Api
 cd ./petstorecodegen
 ```
 
-(Fix missing ";,]["  and await async task to await task in partial or abstract classes generated )
+Manual Fixes for Generated Code
+ - (Fix missing ";,]["  and await async task to await task in partial or abstract classes generated )
+
+1. Open ./petstorecodegen/src/Petsore.Server.Api/Startup.cs
+```
+close off "services.AddAuthorization" with "});"
+```
+2. Open ./petstorecodegen/src/Petsore.Server.Api/Authentication/ApiAuthentication.cs
+```
+close off "if (context.Resource  is  AuthorizationFilterContext  authorizationFilterContext)" with "}"
+```
+3. Search for "abstract async Task"
+```
+replace with "abstract Task"
+```
 
 Restore and build:
 
@@ -46,10 +60,15 @@ Windows: ./build.bat
 Linux: ./build.sh
 ```
 
+Run:
+```
+dotnet run -p src\Petsore.Server.Api\Petsore.Server.Api.csproj
+```
 
-
-
-
+Test Swagger:
+```
+Open browser and navigate to [http://localhost:8080/swagger](http://localhost:8080/swagger)
+```
 
 ## Installing openapi-generate-cli globally
 
